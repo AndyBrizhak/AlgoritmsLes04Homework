@@ -11,16 +11,16 @@
 //0 1 0
 //0 1 1
 
-void Print2(int n, int m, int a[N][M])
-{
-	int i, j;
-	for (i = 0; i < n; i++)
-	{
-		for (j = 0; j < m; j++)
-			printf("%4d", a[i][j]);
-		printf("\n");
-	}
-}
+//void Print2(int n, int m, int a[N][M])
+//{
+//	int i, j;
+//	for (i = 0; i < n; i++)
+//	{
+//		for (j = 0; j < m; j++)
+//			printf("%4d", a[i][j]);
+//		printf("\n");
+//	}
+//}
 
 //#define  W = 3         // ширина рабочего поля
 //#define H = 3         // высота рабочего поля
@@ -54,38 +54,54 @@ void Print2(int n, int m, int a[N][M])
 int main(int argc, char * argv[]) {
 	int i;
 	int j;
-	int *grid;
-	grid = (int*)malloc(N*M * sizeof(int));
-	/*int grid[N][M];*/
-	for ( i = 0; i < 3-1; i++)			//присваиваем все клеткам статус непомеченные
+	/*int *grid;*/
+	/*grid = (int*)malloc(N*M * sizeof(int));*/
+	int grid[N][M];
+	for ( i = 0; i < N; i++)			//присваиваем все клеткам статус непомеченные
 	{
-		for ( j = 0; j < 3-1; j++)
+		for ( j = 0; j < M; j++)
 		{
 			grid[i][j] = 0;
+			printf("I: %d J %d Value %d\n", i, j, grid[i][j]);
+			/*getch();*/
 			/*grid[i][j].state = BLANK;
 			grid[i][j].x = i;
 			grid[i][j].y = i;
 			grid[i][j].len = 0;*/
 		}
 	}
+	printf("===================\n");
+	getch();
 	// обозначаем стены
 	grid[0][1] = -1;
 	grid[0][2] = -1;
 	grid[2][1] = -1;
-	grid[0][1] = 1;
+	
 
 	//grid[0][1].state  = WALL;
 	//grid[0][2].state = WALL;
 	//grid[2][1].state = WALL;
 	//grid[0][1].state = WALL;
 
-	Print2(3, 3, grid[N][M]);
-	getch();
+	/*Print2(3, 3, grid[N][M]);*/
+
+	/*getch();*/
 	
 
 	//grid[2][2].state = -10;   //финишная  ячейка
 	//if (grid[0][0].state == WALL || grid[2][2].state == WALL)
-	if (grid[0][0]== WALL || grid[2][2] == WALL)
+
+	for (i = 0; i < N; i++)			//распечатываем все значения
+	{
+		for (j = 0; j < M; j++)
+		{
+			printf("I: %d J %d Value %d\n", i, j, grid[i][j]);
+		}
+	}
+	printf("===================\n");
+	getch();
+
+	if (grid[0][0]== -1 || grid[2][2] == -1)
 	{
 		printf("No solutions, around walls......");		
 		getch();
@@ -135,7 +151,7 @@ int main(int argc, char * argv[]) {
 		//if (grid[2][2].state == BLANK)   // путь не найден до финишной точки 
 		if (grid[2][2] == BLANK)   // путь не найден до финишной точки 
 		{
-			printf("No solutions, around walls......");		
+			printf("No solutions.....");		
 			getch();
 		}
 	//};
