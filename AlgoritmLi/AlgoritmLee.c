@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <malloc.h>
+
 #define N 3
 #define M 3
 // Брижак Андрей  ДЗ к курсу Алгоритмы и структуры данных. Задача 1.
@@ -52,7 +54,9 @@ void Print2(int n, int m, int a[N][M])
 int main(int argc, char * argv[]) {
 	int i;
 	int j;
-	int grid[N][M];
+	int *grid;
+	grid = (int*)malloc(N*M * sizeof(int));
+	/*int grid[N][M];*/
 	for ( i = 0; i < 3-1; i++)			//присваиваем все клеткам статус непомеченные
 	{
 		for ( j = 0; j < 3-1; j++)
