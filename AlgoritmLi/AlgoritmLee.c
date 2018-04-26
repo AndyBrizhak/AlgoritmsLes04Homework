@@ -101,16 +101,18 @@ int main(int argc, char * argv[]) {
 	printf("===================\n");
 	getch();
 
+	int dx[4] = { 1, 0, -1, 0 };   // смещения, соответствующие соседям ячейки
+	int dy[4] = { 0, 1, 0, -1 };   // справа, снизу, слева и сверху
+	int d, x, y, k, iy, ix;
+
 	if (grid[0][0]== -1 || grid[2][2] == -1)
 	{
-		printf("No solutions, around walls......");		
+		printf("No solutions, around walls......\n");		
 		getch();
 	}
 	else
 	{
-		int dx[4] = { 1, 0, -1, 0 };   // смещения, соответствующие соседям ячейки
-		int dy[4] = { 0, 1, 0, -1 };   // справа, снизу, слева и сверху
-		int d, x, y, k;
+		
 
 		d = 0;
 		//grid[0][0].state = 0;   //стартовая ячейка
@@ -119,23 +121,28 @@ int main(int argc, char * argv[]) {
 		int stop = 0 ;
 		do 	{
 			stop = 1;						// предполагаем, что все свободные клетки уже помечены
-			for ( y = 0; y < H; ++y)
+			
+			for (x = 0; x < W; ++x)
 			{
-				for ( x = 0; x < W; ++x)
+				for (y = 0; y < H; ++y)
 				{
 		//			if (grid[y][x].len == d)
 					if (grid[y][x] == d)						// ячейка (x, y) помечена числом d
 					{
 						for (k = 0; k < 4; ++k)                    // проходим по всем непомеченным соседям
 						{
-							int iy = y + dy[k];
-							int	ix = x + dx[k];
-							if (iy >= 0 && iy < H && ix >= 0 && ix < W && grid[iy][ix]/*.state*/ == BLANK)
+							 iy = y + dy[k];
+							 ix = x + dx[k];
+							 printf("ix: %d iy %d  grid[ix][iy] %d\n", ix, iy, grid[ix][iy]);
+							 getch();
+							if (iy >= 0 && iy < H && ix >= 0 && ix < W && grid[ix][iy]/*.state*/ == BLANK)
 							{
 								stop = 0;              // найдены непомеченные клетки
 		//						grid[iy][ix].len = d + 1;      // распространяем волну
-								grid[iy][ix] = d + 1;      // распространяем волну
+								grid[ix][iy] = d + 1;      // распространяем волну
 		//						grid[iy][ix].state = MARKED;
+								printf("After iy: %d ix %d  grid[ix][iy] %d\n", ix, iy,  grid[ix][iy]);
+								getch();
 
 							}
 						}
@@ -151,12 +158,20 @@ int main(int argc, char * argv[]) {
 		//if (grid[2][2].state == BLANK)   // путь не найден до финишной точки 
 		if (grid[2][2] == BLANK)   // путь не найден до финишной точки 
 		{
-			printf("No solutions.....");		
+			printf("No solutions.....\n");		
 			getch();
 		}
 	//};
 	//
-
+		for (i = 0; i < N; i++)			//распечатываем все значения
+		{
+			for (j = 0; j < M; j++)
+			{
+				printf("I: %d J %d Value %d\n", i, j, grid[i][j]);
+			}
+		}
+		printf("===================\n");
+		getch();
 	//printf("len: %d \n", grid[0][0].len);
 	printf("len: %d \n", grid[2][2]);
 	getch();

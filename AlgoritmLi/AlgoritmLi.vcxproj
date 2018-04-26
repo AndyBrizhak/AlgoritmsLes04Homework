@@ -119,6 +119,9 @@
   <ItemGroup>
     <ClCompile Include="AlgoritmLee.c" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AlgoritmLee.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
